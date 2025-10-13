@@ -1,20 +1,20 @@
 
 <nav class="navbar dark-navbar">
   <div class="navbar-container" *ngIf="sharedService.isLoggedIn$ | async">
-    <button routerLink="/dashboard" routerLinkActive="active" class="nav-btn nav-icon-btn" title="Home">
-      <span class="nav-icon home-icon"></span>
+    <button routerLink="/dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Home">
+      Home
     </button>
-    <button routerLink="/QuestionsDashboard" routerLinkActive="active" class="nav-btn nav-icon-btn" title="Questions">
-      <span class="nav-icon questions-icon"></span>
+    <button routerLink="/QuestionsDashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Questions">
+      Questions
     </button>
-    <button routerLink="/QuizDashboard" routerLinkActive="active" class="nav-btn nav-icon-btn" title="Quiz">
-      <span class="nav-icon quiz-icon"></span>
+    <button routerLink="/QuizDashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Quiz">
+      Quiz
     </button>
-    <button routerLink="/admin-dashboard" routerLinkActive="active" class="nav-btn nav-icon-btn" title="Admin">
-      <span class="nav-icon admin-icon"></span>
+    <button routerLink="/admin-dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Admin">
+      Admin
     </button>
-    <button (click)="logout()" class="nav-btn nav-icon-btn" title="Logout">
-      <span class="nav-icon logout-icon"></span>
+    <button (click)="logout()" class="nav-btn nav-text-btn" title="Logout">
+      Logout
     </button>
   </div>
   <div class="navbar-container" *ngIf="!(sharedService.isLoggedIn$ | async)">
