@@ -15,6 +15,7 @@ import { AdminDashboard } from './Components/Admin-Dashboard/admin-dashboard/adm
 import { authGuard } from './Components/Auth-Service/auth-guard';
 import { roleGuard } from './Components/Auth-Service/role-guard';
 import { UnauthorizedUser } from './Components/unauthorized-user/unauthorized-user';
+import { FeedbackComponent } from './Components/Feedback-Component/feedback-component/feedback-component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/signup', pathMatch: 'full' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
   { path: 'signup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'unauthorized' , component : UnauthorizedUser},
+  { path: 'feedback', component: FeedbackComponent , canActivate: [authGuard]},
 
   {
     path: 'admin-dashboard',

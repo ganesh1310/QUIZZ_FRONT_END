@@ -1,0 +1,30 @@
+<!-- USER Feedback Submission Section -->
+<section class="feedback-section" *ngIf="userRole !== 'ADMIN'">
+  <header>
+    <h1>Feedback</h1>
+    <p class="feedback-desc">We value your feedback! Please let us know your thoughts, suggestions, or issues below.</p>
+  </header>
+  <form class="feedback-form" (ngSubmit)="onSubmitFeedback($event)">
+    <label for="feedback-text" class="visually-hidden">Your Feedback</label>
+    <textarea id="feedback-text" rows="6" placeholder="Type your feedback here..." required [(ngModel)]="feedbackText" name="feedbackText"></textarea>
+    <button type="submit" class="submit-feedback-btn" [disabled]="submitting">Submit Feedback</button>
+  </form>
+</section>
+
+<!-- ADMIN Feedback List Section -->
+<section class="feedback-section" *ngIf="userRole === 'ADMIN'">
+  <header>
+    <h1>All User Feedbacks</h1>
+  </header>
+  <div *ngIf="feedbackList && feedbackList.length > 0; else noFeedback">
+    <ul class="feedback-list">
+      <li *ngFor="let fb of feedbackList" class="feedback-list-item">
+        <div class="feedback-user"><strong>{{ fb.userName }}</strong></div>
+        <div class="feedback-desc">{{ fb.description }}</div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noFeedback>
+    <div class="no-feedback-msg">No feedbacks found.</div>
+  </ng-template>
+</section>

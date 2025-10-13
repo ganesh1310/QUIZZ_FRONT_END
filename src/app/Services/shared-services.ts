@@ -3,12 +3,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedServices {
-  constructor(
-    private httpClient: HttpClient
-  ) { }
+  constructor(private httpClient: HttpClient) {}
 
   public isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
@@ -16,20 +14,26 @@ export class SharedServices {
   public userRoleSubject = new BehaviorSubject<String>('');
   userRole$ = this.userRoleSubject.asObservable();
 
-  authCommonUrl = 'http://localhost:8083/'
+  authCommonUrl = 'http://localhost:8083/';
   questionCommonUrl = 'http://localhost:8765/question/';
   quizCommonUrl = 'http://localhost:8765/quiz/';
 
   signUp(data: any) {
-    return this.httpClient.post(this.authCommonUrl + 'signup', data , { responseType: 'text' });
+    return this.httpClient.post(this.authCommonUrl + 'signup', data, {
+      responseType: 'text',
+    });
   }
 
   login(data: any) {
-    return this.httpClient.post(this.authCommonUrl + 'login', data , { responseType: 'text' });
+    return this.httpClient.post(this.authCommonUrl + 'login', data, {
+      responseType: 'text',
+    });
   }
 
   addQuestion(data: any) {
-    return this.httpClient.post(this.questionCommonUrl + 'add', data , { responseType: 'text' });
+    return this.httpClient.post(this.questionCommonUrl + 'add', data, {
+      responseType: 'text',
+    });
   }
 
   getAllQuestions() {
@@ -37,11 +41,15 @@ export class SharedServices {
   }
 
   getQuestionsByCategory(category: string) {
-    return this.httpClient.get(this.questionCommonUrl + 'category/' + encodeURIComponent(category));
+    return this.httpClient.get(
+      this.questionCommonUrl + 'category/' + encodeURIComponent(category)
+    );
   }
 
   createQuiz(data: any) {
-    return this.httpClient.post(this.quizCommonUrl + 'create', data , { responseType: 'text' });
+    return this.httpClient.post(this.quizCommonUrl + 'create', data, {
+      responseType: 'text',
+    });
   }
 
   getQuizById(quizId: number) {
@@ -53,18 +61,31 @@ export class SharedServices {
   }
 
   submitQuiz(quizId: number, answers: any) {
-    return this.httpClient.post(this.quizCommonUrl + 'submit/' + quizId, answers);
+    return this.httpClient.post(
+      this.quizCommonUrl + 'submit/' + quizId,
+      answers
+    );
   }
 
- getAccessByJwt() {
-  const token = localStorage.getItem('jwtToken'); // or 'access_token' based on your storage key
-  const headers = {
-    Authorization: `Bearer ${token}`
-  };
+  getAccessByJwt() {
+    const token = localStorage.getItem('jwtToken'); // or 'access_token' based on your storage key
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-  return this.httpClient.get(this.authCommonUrl + 'getData', {
-    headers,
-    responseType: 'text'
-  });
- }
+    return this.httpClient.get(this.authCommonUrl + 'getData', {
+      headers,
+      responseType: 'text',
+    });
+  }
+
+  submitFeedback(data: any) {
+    return this.httpClient.post(this.quizCommonUrl + 'feedback', data, {
+      responseType: 'text',
+    });
+  }
+
+  getAllFeedback() {
+    return this.httpClient.get(this.quizCommonUrl + 'getAllFeedbacks');
+  }
 }
