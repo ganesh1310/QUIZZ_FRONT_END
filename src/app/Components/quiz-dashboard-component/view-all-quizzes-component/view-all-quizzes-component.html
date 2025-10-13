@@ -1,0 +1,26 @@
+<div class="all-quizzes-container">
+	<h2>All Quizzes</h2>
+	@if (quizzes && quizzes.length > 0) {
+		<table class="quizzes-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Questions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for (quiz of quizzes; track quiz.id) {
+					<tr>
+						<td>{{ quiz.id }}</td>
+						<td>{{ quiz.title }}</td>
+						<td>{{ quiz.questionIds.length }}</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	@if (!quizzes || quizzes.length === 0) {
+		<div class="no-quizzes-msg">No quizzes found.</div>
+	}
+</div>

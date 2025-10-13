@@ -1,0 +1,114 @@
+
+.category-search-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	margin: 2.5rem 0 1.5rem 0;
+}
+
+.category-search-input {
+	padding: 0.7rem 1.2rem;
+	border: 1.5px solid #d1d5db;
+	border-radius: 8px;
+	font-size: 1rem;
+	background: #f9fafe;
+	transition: border 0.2s;
+	min-width: 260px;
+}
+.category-search-input:focus {
+	border-color: #6a82fb;
+	outline: none;
+}
+
+.category-search-btn {
+	background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+	color: #fff;
+	font-weight: 700;
+	padding: 0.7rem 2.2rem;
+	border: none;
+	border-radius: 30px;
+	font-size: 1.1rem;
+	cursor: pointer;
+	transition: background 0.2s, box-shadow 0.2s;
+	box-shadow: 0 2px 8px rgba(76, 110, 245, 0.10);
+}
+.category-search-btn:hover {
+	background: #4e54c8;
+	color: #ffd700;
+	box-shadow: 0 4px 16px rgba(76, 110, 245, 0.18);
+}
+
+.error-msg {
+	color: #d32f2f;
+	background: #ffeaea;
+	border: 1px solid #f8bcbc;
+	border-radius: 8px;
+	padding: 0.7rem 1.2rem;
+	margin: 0 auto 1.2rem auto;
+	max-width: 400px;
+	text-align: center;
+	font-weight: 600;
+}
+
+.loading-msg {
+	color: #4e54c8;
+	background: #e6eaff;
+	border: 1px solid #bfc4e0;
+	border-radius: 8px;
+	padding: 0.7rem 1.2rem;
+	margin: 0 auto 1.2rem auto;
+	max-width: 400px;
+	text-align: center;
+	font-weight: 600;
+}
+
+.no-questions-msg {
+	color: #888;
+	background: #f6f8fc;
+	border-radius: 8px;
+	padding: 1.2rem 1.2rem;
+	margin: 2rem auto 0 auto;
+	max-width: 400px;
+	text-align: center;
+	font-weight: 500;
+}
+
+.questions-table-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	min-height: 60vh;
+	background: #f6f8fc;
+	padding: 2rem 0;
+}
+
+.questions-table {
+	border-collapse: collapse;
+	width: 90%;
+	max-width: 900px;
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 4px 24px rgba(76, 110, 245, 0.10);
+	overflow: hidden;
+}
+.questions-table th, .questions-table td {
+	padding: 1.1rem 1.5rem;
+	text-align: left;
+}
+.questions-table th {
+	background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+	color: #fff;
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+.questions-table tr:nth-child(even) {
+	background: #f6f8fc;
+}
+.questions-table tr:hover {
+	background: #e6eaff;
+}
+.questions-table td {
+	color: #333;
+	font-size: 1rem;
+}

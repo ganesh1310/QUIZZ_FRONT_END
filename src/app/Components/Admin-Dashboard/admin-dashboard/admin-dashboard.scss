@@ -1,0 +1,30 @@
+.admin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* full screen height */
+  background-color: #f3f4f6; /* soft neutral background */
+}
+
+.admin-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #1565c0; /* elegant blue */
+  text-align: center;
+  animation: fadeIn 1.2s ease-in-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  letter-spacing: 1.5px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

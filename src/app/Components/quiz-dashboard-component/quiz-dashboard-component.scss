@@ -1,0 +1,77 @@
+
+
+.quiz-dashboard-card-group {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2.5rem;
+	margin-top: 4rem;
+}
+
+.quiz-dashboard-card {
+	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+	border-radius: 18px;
+	box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+	padding: 2.2rem 2.1rem 1.5rem 2.1rem;
+	min-width: 260px;
+	max-width: 320px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+	transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+	border: 2px solid transparent;
+}
+.quiz-dashboard-card:hover {
+	box-shadow: 0 8px 32px rgba(25,118,210,0.18);
+	background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+	color: #fff;
+	border: 2px solid #1976d2;
+	transform: translateY(-6px) scale(1.03);
+}
+.card-icon {
+	width: 48px;
+	height: 48px;
+	margin-bottom: 1.1rem;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.card-icon-create {
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%231976d2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm14.71-9.04a1.003 1.003 0 0 0 0-1.42l-2.5-2.5a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>');
+}
+.quiz-dashboard-card:hover .card-icon-create {
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%23fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm14.71-9.04a1.003 1.003 0 0 0 0-1.42l-2.5-2.5a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>');
+}
+.card-icon-get {
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%231976d2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10a4 4 0 100 8 4 4 0 000-8z"/></svg>');
+}
+.quiz-dashboard-card:hover .card-icon-get {
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%23fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 13c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10a4 4 0 100 8 4 4 0 000-8z"/></svg>');
+}
+.card-icon-view {
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%231976d2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>');
+}
+.quiz-dashboard-card:hover .card-icon-view {
+	background-image: url('data:image/svg+xml;utf8,<svg fill="%23fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>');
+}
+.card-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 0.5rem;
+	color: #1976d2;
+	text-align: center;
+	letter-spacing: 0.5px;
+}
+.quiz-dashboard-card:hover .card-title {
+	color: #fff;
+}
+.card-desc {
+	font-size: 1rem;
+	color: #34495e;
+	text-align: center;
+	margin-bottom: 0.2rem;
+}
+.quiz-dashboard-card:hover .card-desc {
+	color: #e3f2fd;
+}

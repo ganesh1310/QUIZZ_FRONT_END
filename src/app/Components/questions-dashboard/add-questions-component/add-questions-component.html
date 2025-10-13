@@ -1,0 +1,51 @@
+
+<div class="add-question-container">
+	<form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="question-form">
+		<h2>Add New Question</h2>
+		<div class="form-group">
+			<label for="questionTitle">Question</label>
+			<textarea id="questionTitle" formControlName="questionTitle" rows="2" placeholder="Enter question..." required></textarea>
+		</div>
+		<div class="form-group">
+			<label for="option1">Option 1</label>
+			<input id="option1" type="text" formControlName="option1" placeholder="Option 1" required />
+		</div>
+		<div class="form-group">
+			<label for="option2">Option 2</label>
+			<input id="option2" type="text" formControlName="option2" placeholder="Option 2" required />
+		</div>
+		<div class="form-group">
+			<label for="option3">Option 3</label>
+			<input id="option3" type="text" formControlName="option3" placeholder="Option 3" required />
+		</div>
+		<div class="form-group">
+			<label for="option4">Option 4</label>
+			<input id="option4" type="text" formControlName="option4" placeholder="Option 4" required />
+		</div>
+		<div class="form-group">
+			<label for="rightAnswer">Right Answer</label>
+			<input id="rightAnswer" type="text" formControlName="rightAnswer" placeholder="Right Answer" required />
+		</div>
+		<div class="form-row">
+			<div class="form-group">
+				<label for="difficultylevel">Difficulty</label>
+				<select id="difficultylevel" formControlName="difficultylevel" required>
+					<option value="">Select</option>
+					<option value="Easy">Easy</option>
+					<option value="Medium">Medium</option>
+					<option value="Hard">Hard</option>
+				</select>
+			</div>
+					<div class="form-group">
+						<label for="category">Category</label>
+						<select id="category" formControlName="category" required>
+							<option value="">Select</option>
+							<option value="Angular">Angular</option>
+							<option value="Java">Java</option>
+							<option value="Spring Boot">Spring Boot</option>
+						</select>
+					</div>
+		</div>
+		<button type="submit" class="submit-btn" [disabled]="!questionForm.valid">Add Question</button>
+	</form>
+</div>

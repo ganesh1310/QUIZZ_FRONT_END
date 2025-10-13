@@ -1,0 +1,31 @@
+<div class="quiz-container" *ngIf="quizData?.length">
+  <form (ngSubmit)="submitQuiz()">
+    <div *ngFor="let question of quizData; let i = index" class="question-block">
+      <h4>Q{{ i + 1 }}. {{ question.questionTitle }}</h4>
+      <div class="options">
+        <label *ngFor="let opt of ['option1', 'option2', 'option3', 'option4']; let optIdx = index">
+          <input
+            type="radio"
+            name="question{{ i }}"
+            [(ngModel)]="userAnswers[i]"
+            [value]="optIdx"
+            required
+          />
+          {{ question[opt] }}
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Quiz</button>
+  </form>
+</div>
+
+
+<!-- quiz.component.html -->
+<div class="score-popup" *ngIf="showScore">
+  <div class="score-content">
+    <h2>🎉 Quiz Submitted!</h2>
+    <p>Your Score: <strong>{{ score }}</strong></p>
+    <button (click)="closeScorePopup()">Close</button>
+  </div>
+</div>

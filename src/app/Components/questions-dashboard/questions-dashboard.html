@@ -1,0 +1,21 @@
+
+
+<div class="questions-dashboard-card-group">
+    <div *ngIf="userRole === 'ADMIN'" class="questions-dashboard-card" routerLink="/addQuestion" routerLinkActive="active">
+        <div class="card-icon card-icon-add"></div>
+        <div class="card-title">Add Questions</div>
+        <div class="card-desc">Create new quiz questions for your database.</div>
+    </div>
+    <div class="questions-dashboard-card" routerLink="/viewAllQuestions" routerLinkActive="active">
+        <div class="card-icon card-icon-view"></div>
+        <div class="card-title">View All Questions</div>
+        <div class="card-desc">Browse and manage all questions in the system.</div>
+    </div>
+    <div class="questions-dashboard-card" routerLink="/viewQuestionsByCategory" routerLinkActive="active">
+        <div class="card-icon card-icon-category"></div>
+        <div class="card-title">View Questions By Category</div>
+        <div class="card-desc">Filter questions by their assigned category.</div>
+    </div>
+</div>
+
+

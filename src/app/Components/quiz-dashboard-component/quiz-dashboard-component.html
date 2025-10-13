@@ -1,0 +1,19 @@
+
+
+<div class="quiz-dashboard-card-group">
+	<div *ngIf="userRole === 'ADMIN'" class="quiz-dashboard-card" routerLink="/createQuiz">
+		<div class="card-icon card-icon-create"></div>
+		<div class="card-title">Create Quiz</div>
+		<div class="card-desc">Build a new quiz for users to attempt.</div>
+	</div>
+	<div class="quiz-dashboard-card" routerLink="/getQuiz">
+		<div class="card-icon card-icon-get"></div>
+		<div class="card-title">Get Quiz</div>
+		<div class="card-desc">Attempt or preview available quizzes.</div>
+	</div>
+	<div *ngIf="userRole === 'ADMIN'" class="quiz-dashboard-card" routerLink="/viewAllQuizzes">
+		<div class="card-icon card-icon-view"></div>
+		<div class="card-title">View All Quiz</div>
+		<div class="card-desc">See all quizzes created in the system.</div>
+	</div>
+</div>

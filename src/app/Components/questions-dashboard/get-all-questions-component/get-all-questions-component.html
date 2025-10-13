@@ -1,0 +1,24 @@
+<div class="questions-table-container">
+	<table class="questions-table">
+		<thead>
+			<tr>
+                <th>Sr.No.</th>
+				<th>Title</th>
+				<th>Difficulty</th>
+				<th>Answer</th>
+				<th>Category</th>
+			</tr>
+		</thead>
+		<tbody>
+					@for (q of questionList; track q.id) {
+						<tr>
+                            <td>{{ 1 + $index }}</td>
+							<td>{{ q.questionTitle }}</td>
+							<td>{{ q.difficultylevel }}</td>
+							<td>{{ q.rightAnswer }}</td>
+							<td>{{ q.category }}</td>
+						</tr>
+					}
+		</tbody>
+	</table>
+</div>
