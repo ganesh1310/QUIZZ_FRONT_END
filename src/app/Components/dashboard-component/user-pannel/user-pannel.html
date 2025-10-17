@@ -1,3 +1,23 @@
-@if (role === 'USER') {
+@if (role === 'USER' || 'ADMIN') {
   <p>User Panel Content</p>
+
+  @for (user of users;track $index) {
+  <div class="user-info-card">
+    <h3>User {{ 1 + $index }}</h3>
+    <p [ngStyle]="{ 'color': 'blue', 'font-size': '18px' }"><strong>Name:</strong> {{ user.name }}</p>
+  <p [ngClass]="{setRed : user.isAdmin}"><strong>Role:</strong> {{ user.role }}</p>
+  </div>
 }
+}
+
+<!--
+
+1.Component Directives : 
+  - ngIf(@if)   : Conditionally renders sections based on user role.
+  - ngFor(@for) : Iterates over a list of users to display their information.
+  - ngStyle     : Dynamically applies inline styles to elements.
+  - ngClass     : Conditionally applies CSS classes based on user properties.
+  - ngModel     : Two-way data binding for form inputs.
+  - @Component  : Defines the component metadata including selector, template, and styles.
+
+-->
