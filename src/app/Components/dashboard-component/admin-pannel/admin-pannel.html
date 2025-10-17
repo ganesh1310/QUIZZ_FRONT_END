@@ -1,0 +1,11 @@
+@if (role === 'ADMIN') {
+  <div class="admin-panel-root">
+    <div class="admin-default">
+      <p>Admin Panel Content</p>
+    </div>
+    <!-- projection slot for custom content from parent -->
+    <div class="admin-projected">
+      <ng-content></ng-content>
+    </div>
+  </div>
+}

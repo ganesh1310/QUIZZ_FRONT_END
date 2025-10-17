@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@
 import { SharedServices } from '../../../Services/shared-services';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoaderService } from '../../../Services/loader.service';
 
 @Component({
   selector: 'app-feedback-component',
@@ -18,7 +19,12 @@ export class FeedbackComponent {
   feedbackList: any[] = [];
   userRole: string = '';
 
-  constructor(private sharedService: SharedServices , private cdr : ChangeDetectorRef) {
+  constructor(
+    private sharedService: SharedServices , 
+    private cdr : ChangeDetectorRef,
+    private loaderService: LoaderService
+  ) 
+    {
     this.sharedService.userRole$.subscribe(role => {
       this.userRole = (role || '').toUpperCase();
       if (this.userRole === 'ADMIN') {
@@ -34,14 +40,17 @@ export class FeedbackComponent {
   }
 
   loadFeedbacks() {
+    this.loaderService.show();
     this.sharedService.getAllFeedback().subscribe({
       next: (data: any) => {
         setTimeout(() => this.cdr.detectChanges());
         this.feedbackList = Array.isArray(data) ? data : [];
         console.log('Feedback List:', this.feedbackList);
+        this.loaderService.hide();
       },
       error: () => {
         this.feedbackList = [];
+        this.loaderService.hide();
       }
     });
   }

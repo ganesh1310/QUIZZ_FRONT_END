@@ -1,1 +1,28 @@
-<span class="title">{{ title }}</span>
+<div class="dashboard-wrapper">
+  <div class="top-buttons" aria-hidden="false">
+    <div class="panel-button-container">
+      <button class="panel-button primary" (click)="setPanel('ADMIN')">Admin Panel</button>
+      <button class="panel-button" (click)="setPanel('USER')">User Panel</button>
+    </div>
+  </div>
+
+  <div class="dashboard-wrapper">
+    <div class="dashboard-center">
+      <h1 class="title">{{ title }}</h1>
+    </div>
+
+    @if (activePanel === 'ADMIN' && role === 'ADMIN') {
+      <app-admin-pannel [role]="role">
+        <!-- custom content projected into admin panel -->
+        <div class="custom-admin-card">
+          <h3>Quick Admin Links</h3>
+          <div class="admin-link-row">
+            <button class="panel-button">Manage Users</button>
+            <button class="panel-button">View Reports</button>
+          </div>
+        </div>
+      </app-admin-pannel>
+    } @else if (activePanel === 'USER' && role === 'USER') {
+      <app-user-pannel [role]="role"></app-user-pannel>
+    }
+  </div>
