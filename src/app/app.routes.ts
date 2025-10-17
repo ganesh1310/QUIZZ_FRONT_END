@@ -12,14 +12,27 @@ import { ViewAllQuizzesComponent } from './Components/quiz-dashboard-component/v
 import { SingupComponent } from './Components/singup-component/singup-component';
 import { LoginComponent } from './Components/login-component/login-component';
 import { AdminDashboard } from './Components/Admin-Dashboard/admin-dashboard/admin-dashboard';
-import { authGuard } from './Components/Auth-Service/auth-guard';
-import { roleGuard } from './Components/Auth-Service/role-guard';
+import { authGuard } from './Components/Guards/auth-guard';
+import { roleGuard } from './Components/Guards/role-guard';
 import { UnauthorizedUser } from './Components/unauthorized-user/unauthorized-user';
 import { FeedbackComponent } from './Components/Feedback-Component/feedback-component/feedback-component';
+import { canDeactivateGuard } from './Components/Guards/can-deactivate-guard';
+import { adminAccessGuard } from './Components/Guards/admin-access-guard';
+import { AdminPannel } from './Components/dashboard-component/admin-pannel/admin-pannel';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/signup', pathMatch: 'full' },
-  { path: 'home', component: DashboardComponent , canActivate: [authGuard]},
+
+  { 
+    path: 'home', 
+    component: DashboardComponent , 
+    canActivate: [authGuard],
+    canActivateChild : [adminAccessGuard],
+    children: [
+      {path : 'adminpannel', component: AdminPannel}
+    ]
+  },
+
   { path: 'QuestionsDashboard', component: QuestionsDashboard , canActivate: [authGuard]},
   { path: 'addQuestion', component: AddQuestionsComponent , canActivate: [authGuard]},
   { path: 'viewAllQuestions', component: GetAllQuestionsComponent , canActivate: [authGuard]},
@@ -33,7 +46,12 @@ export const routes: Routes = [
   { path: 'signup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'unauthorized' , component : UnauthorizedUser},
-  { path: 'feedback', component: FeedbackComponent , canActivate: [authGuard]},
+
+  { 
+    path: 'feedback', 
+    component: FeedbackComponent , 
+    canDeactivate: [canDeactivateGuard],
+    canActivate: [authGuard]},
 
   {
     path: 'admin-dashboard',
@@ -41,5 +59,11 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { expectedRole: 'ADMIN' },
   },
+
+  {
+    path: 'owner',
+    loadChildren: () => import('./owner/owner-module').then(m => m.OwnerModule)
+  },
+
   { path: '**', redirectTo: '/home' },
 ];

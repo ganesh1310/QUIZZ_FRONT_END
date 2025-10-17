@@ -6,7 +6,7 @@
   </header>
   <form class="feedback-form" (ngSubmit)="onSubmitFeedback($event)">
     <label for="feedback-text" class="visually-hidden">Your Feedback</label>
-    <textarea id="feedback-text" rows="6" placeholder="Type your feedback here..." required [(ngModel)]="feedbackText" name="feedbackText"></textarea>
+  <textarea id="feedback-text" rows="6" placeholder="Type your feedback here..." required [(ngModel)]="feedbackText" name="feedbackText" (input)="markDirty()"></textarea>
     <button type="submit" class="submit-feedback-btn" [disabled]="submitting">Submit Feedback</button>
   </form>
 </section>

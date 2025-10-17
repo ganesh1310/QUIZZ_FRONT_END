@@ -4,6 +4,7 @@ import { SharedServices } from '../../../Services/shared-services';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from '../../../Services/loader.service';
+import { CanDeactivate } from '@angular/router';
 
 @Component({
   selector: 'app-feedback-component',
@@ -13,9 +14,10 @@ import { LoaderService } from '../../../Services/loader.service';
   changeDetection: ChangeDetectionStrategy.Default,
   standalone: true
 })
-export class FeedbackComponent {
+export class FeedbackComponent{
   feedbackText = '';
   submitting = false;
+  hasChanges = false; // true when user types but hasn't submitted
   feedbackList: any[] = [];
   userRole: string = '';
 
@@ -74,5 +76,18 @@ export class FeedbackComponent {
         this.submitting = false;
       }
     });
+  }
+
+  // Called by the global canDeactivate guard (route guard)
+  canDeactivate(): boolean {
+    if (this.hasChanges) {
+      return confirm('You have unsaved feedback. Do you really want to leave without submitting?');
+    }
+    return true;
+  }
+
+  // mark the form as dirty when user types
+  markDirty() {
+    this.hasChanges = !!(this.feedbackText && this.feedbackText.toString().trim().length > 0);
   }
 }
