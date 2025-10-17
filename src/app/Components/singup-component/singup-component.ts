@@ -49,14 +49,16 @@ export class SingupComponent {
     this.sharedService.signUp(payload).subscribe({
       next: (res) => {
         this.successMsg = 'Signup successful! Redirecting to login...';
-        this.sharedService.isLoggedInSubject.next(true);
+        // this.sharedService.isLoggedInSubject.next(true);
+        this.sharedService.isLoggedInSignal.set(true);
         setTimeout(() => this.router.navigate(['/login']), 1500);
         this.loading = false;
       },
       error: (err) => {
         this.errorMsg = err?.error?.message || 'Signup failed. Please try again.';
         this.loading = false;
-        this.sharedService.isLoggedInSubject.next(false);
+        // this.sharedService.isLoggedInSubject.next(false);
+        this.sharedService.isLoggedInSignal.set(false);
       }
     });
   }

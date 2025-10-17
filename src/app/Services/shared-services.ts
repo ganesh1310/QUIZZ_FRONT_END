@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { BehaviorSubject, single } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedServices {
   constructor(private httpClient: HttpClient) {}
 
-  public isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  // public isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  // isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  public userRoleSubject = new BehaviorSubject<String>('');
-  userRole$ = this.userRoleSubject.asObservable();
+  // public userRoleSubject = new BehaviorSubject<String>('');
+  // userRole$ = this.userRoleSubject.asObservable();
+
+  //implemeting signals over subjects
+  public isLoggedInSignal = signal<boolean>(false);
+  public userRoleSignal = signal<string>('');
 
   authCommonUrl = 'http://localhost:8083/';
   questionCommonUrl = 'http://localhost:8765/question/';

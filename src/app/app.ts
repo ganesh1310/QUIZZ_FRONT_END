@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LoaderComponent } from './Components/Loader/loader.component';
@@ -18,6 +18,7 @@ import { SharedServices } from './Services/shared-services';
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class App implements OnInit {
   protected title = 'Quiz_App';
@@ -31,10 +32,12 @@ export class App implements OnInit {
     const role = localStorage.getItem('userRole');
     const token = localStorage.getItem('jwtToken');
     if (token) {
-      this.sharedService.isLoggedInSubject.next(true);
+      // this.sharedService.isLoggedInSubject.next(true);
+      this.sharedService.isLoggedInSignal.set(true);
     }
     if (role) {
-      this.sharedService.userRoleSubject.next(role);
+      // this.sharedService.userRoleSubject.next(role);
+      this.sharedService.userRoleSignal.set(role);
     }
   }
 
@@ -44,7 +47,8 @@ export class App implements OnInit {
     localStorage.removeItem('userRole');
 
     // Update login flag
-    this.sharedService.isLoggedInSubject.next(false);
+    // this.sharedService.isLoggedInSubject.next(false);
+    this.sharedService.isLoggedInSignal.set(false);
 
     // Navigate to login or landing page
     this.router.navigate(['/login']);

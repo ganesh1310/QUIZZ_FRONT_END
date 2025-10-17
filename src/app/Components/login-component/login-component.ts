@@ -43,8 +43,8 @@ export class LoginComponent {
           const response = JSON.parse(res);
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('userRole', response.role);
-          this.sharedService.isLoggedInSubject.next(true);
-          this.sharedService.userRoleSubject.next(response.role);
+          this.sharedService.isLoggedInSignal.set(true);
+          this.sharedService.userRoleSignal.set(response.role);
           this.loader.hide();
           this.loading = false;
           this.router.navigate(['/home']);
@@ -60,7 +60,7 @@ export class LoginComponent {
           err?.error?.message || 'Login failed. Please try again.';
         this.loader.hide();
         this.loading = false;
-        this.sharedService.isLoggedInSubject.next(false);
+        this.sharedService.isLoggedInSignal.set(false);
       },
     });
   }

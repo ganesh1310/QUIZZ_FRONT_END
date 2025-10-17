@@ -19,7 +19,8 @@ export class UnauthorizedUser implements OnInit {
 
   goToLogin(){
     this.router.navigate(['/login']);
-    this.sharedServices.isLoggedInSubject.next(false);
+    // this.sharedServices.isLoggedInSubject.next(false);
+    this.sharedServices.isLoggedInSignal.set(false);
   }
 
 }

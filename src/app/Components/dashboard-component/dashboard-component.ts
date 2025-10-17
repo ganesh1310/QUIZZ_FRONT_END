@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SharedServices } from '../../Services/shared-services';
 import { LoaderService } from '../../Services/loader.service';
 import { UserPannel } from "./user-pannel/user-pannel";
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   imports: [UserPannel, AdminPannel , CommonModule],
   templateUrl: './dashboard-component.html',
   styleUrl: './dashboard-component.scss',
+  changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
   title = '';

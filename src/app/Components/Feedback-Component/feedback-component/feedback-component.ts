@@ -11,7 +11,7 @@ import { CanDeactivate } from '@angular/router';
   templateUrl: './feedback-component.html',
   styleUrls: ['./feedback-component.scss'],
   imports: [CommonModule, FormsModule],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
 export class FeedbackComponent{
@@ -27,12 +27,18 @@ export class FeedbackComponent{
     private loaderService: LoaderService
   ) 
     {
-    this.sharedService.userRole$.subscribe(role => {
+      const role = this.sharedService.userRoleSignal();
       this.userRole = (role || '').toUpperCase();
-      if (this.userRole === 'ADMIN') {
+      if(this.userRole === 'ADMIN'){
         this.loadFeedbacks();
       }
-    });
+
+    // this.sharedService.userRole$.subscribe(role => {
+    //   this.userRole = (role || '').toUpperCase();
+    //   if (this.userRole === 'ADMIN') {
+    //     this.loadFeedbacks();
+    //   }
+    // });
   }
 
   ngOnInit() {

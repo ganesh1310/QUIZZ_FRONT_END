@@ -1,6 +1,6 @@
 
 <nav class="navbar dark-navbar">
-  <div class="navbar-container" *ngIf="sharedService.isLoggedIn$ | async">
+  <div class="navbar-container" *ngIf="sharedService.isLoggedInSignal()">
     <button routerLink="/dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Home">
       Home
     </button>
@@ -20,7 +20,7 @@
       Logout
     </button>
   </div>
-  <div class="navbar-container" *ngIf="!(sharedService.isLoggedIn$ | async)">
+  <div class="navbar-container" *ngIf="!(sharedService.isLoggedInSignal())">
     <span style="color: white; background: none;" class="welcome-message">Welcome to the Quiz App! Please log in or sign up.</span>
   </div>
 </nav>

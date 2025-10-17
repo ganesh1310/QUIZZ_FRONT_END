@@ -19,12 +19,15 @@ export class ViewAllQuizzesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loaderService.show();
     this.sharedService.getAllQuizzes().subscribe((data) => {
       console.log(data);
       setTimeout(() => this.cdr.detectChanges());
       this.quizzes = data;
+      this.loaderService.hide();
     } , (error) => {
       console.error('Error fetching quizzes', error);
+      this.loaderService.hide();
     });
   }
 }
