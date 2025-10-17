@@ -12,7 +12,7 @@
     </div>
 
     @if (activePanel === 'ADMIN' && role === 'ADMIN') {
-      <app-admin-pannel [role]="role">
+      <app-admin-pannel [role]="role" (sendToParent)="getDataFromChild($event)">
         <!-- custom content projected into admin panel -->
         <div class="custom-admin-card">
           <h3>Quick Admin Links</h3>

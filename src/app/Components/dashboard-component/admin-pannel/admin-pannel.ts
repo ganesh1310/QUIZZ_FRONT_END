@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-admin-pannel',
@@ -8,7 +8,18 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
   styleUrl: './admin-pannel.scss'
 })
 export class AdminPannel implements OnChanges , OnInit , DoCheck , AfterContentInit , AfterContentChecked , AfterViewInit , AfterViewChecked , OnDestroy{
-  @Input() role: any;
+  //parent to child communication using @Input()
+  @Input() role: any; 
+
+  //child to parent communication can be done using @Output() and EventEmitter
+  @Output() sendToParent = new EventEmitter<any>();
+
+  adminData: string = 'Admin Panel Data';
+
+  sendDataToParent(){
+    this.sendToParent.emit('Data from Admin Panel');
+  }
+
   private previousRole: any;
 
   //every time there is a change in input properties this method will be called
