@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, single } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, retry, single, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,49 +18,98 @@ export class SharedServices {
   public isLoggedInSignal = signal<boolean>(false);
   public userRoleSignal = signal<string>('');
 
+  /*
+    Rxjs Observables Vs Subjects Vs Behaviour_Subjects
+
+    1.Observable:
+      - Represents a stream of data that can be observed.
+      - Cold by default, meaning they don't emit values until subscribed to.
+      - Unicast: Each subscriber gets its own independent execution.
+      - Cannot hold a current value.
+
+    2.Subjects:
+      - A special type of Observable that allows multicasting to multiple observers.
+      - Hot by default, meaning they emit values regardless of subscriptions.
+      - Can be used to emit values to multiple subscribers.
+      - Does not hold a current value.
+
+    3.Behavior Subjects:
+      - A type of Subject that requires an initial value and emits its current value to new subscribers.
+      - Hot by default, similar to Subjects.
+      - Can be used to emit values to multiple subscribers.
+      - Holds a current value that can be accessed synchronously.
+
+  */
+
+    public isSubmitted = new Subject<Boolean>();
+    isSubmitted$ = this.isSubmitted.asObservable();
+
+    public getRole = new BehaviorSubject<String>('');
+    getRole$ = this.getRole.asObservable();
+
+    updateObservables(){
+      this.isSubmitted.next(true);
+      this.getRole.next('Admin');
+    }
+
+    extractDataFromObservables(){
+      this.isSubmitted$.subscribe((value)=>{
+        console.log("Is Submitted Value: ", value);
+      });
+
+      this.getRole$.subscribe((role)=>{
+        console.log("Role Value: ", role);
+      });
+    }
+
   authCommonUrl = 'http://localhost:8083/';
   questionCommonUrl = 'http://localhost:8765/question/';
   quizCommonUrl = 'http://localhost:8765/quiz/';
 
-  signUp(data: any) {
+  signUp(data: any) : Observable<any> {
     return this.httpClient.post(this.authCommonUrl + 'signup', data, {
       responseType: 'text',
     });
   }
 
-  login(data: any) {
+  login(data: any): Observable<any> {
     return this.httpClient.post(this.authCommonUrl + 'login', data, {
       responseType: 'text',
     });
   }
 
-  addQuestion(data: any) {
+  addQuestion(data: any) : Observable<any> {
     return this.httpClient.post(this.questionCommonUrl + 'add', data, {
       responseType: 'text',
     });
   }
 
-  getAllQuestions() {
-    return this.httpClient.get(this.questionCommonUrl + 'allquestions');
+  getAllQuestions() : Observable<any> {
+    return this.httpClient.get(this.questionCommonUrl + 'allquestions').pipe(
+      retry(2),
+      catchError(err =>{
+        throw 'Error in getAllQuestions: ' + err;
+      })
+    );
   }
 
-  getQuestionsByCategory(category: string) {
+  getQuestionsByCategory(category: string) : Observable<any> {
     return this.httpClient.get(
       this.questionCommonUrl + 'category/' + encodeURIComponent(category)
     );
   }
 
-  createQuiz(data: any) {
+  createQuiz(data: any): Observable<any> {
     return this.httpClient.post(this.quizCommonUrl + 'create', data, {
       responseType: 'text',
     });
   }
 
-  getQuizById(quizId: number) {
+  getQuizById(quizId: number): Observable<any> {
     return this.httpClient.get(this.quizCommonUrl + 'get/' + quizId);
   }
 
-  getAllQuizzes() {
+  getAllQuizzes(): Observable<any> {
     return this.httpClient.get(this.quizCommonUrl + 'getAll');
   }
 
@@ -89,7 +138,7 @@ export class SharedServices {
     });
   }
 
-  getAllFeedback() {
+  getAllFeedback() : Observable<any> {
     return this.httpClient.get(this.quizCommonUrl + 'getAllFeedbacks');
   }
 }
