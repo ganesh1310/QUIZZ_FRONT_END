@@ -1,1 +1,16 @@
-<p>owner-dash-board works!</p>
+<div>
+    <h2>{{ title }}</h2>
+
+    <img [src]="imgUrl" alt="Angular Logo" />
+
+    <button (click)="submitEvent()">submit</button>
+
+    <input type="text" [(ngModel)]="name" />
+    <p>Your name is: {{ name }}</p>
+
+    <div [class.active]="isActive">Class Binding</div>
+
+    <p [style.fontSize]="fontSize">Style Binding</p>
+
+
+</div>

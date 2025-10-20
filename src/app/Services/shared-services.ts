@@ -1,12 +1,21 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Inject, Injectable, signal } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, retry, single, Subject } from 'rxjs';
+import { RxJsOperators } from './rx-js-operators';
+import { JWT_STORAGE_KEY, JwtToken } from '../Components/Quiz_Custom_Token/jwt-token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedServices {
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+
+    @Inject(JWT_STORAGE_KEY) private jwtToken : JwtToken
+
+    //use of forwardRef() can also be done here to resolve circular dependencies
+    // private rxJsOperators: RxJsOperators
+  ) {}
 
   // public isLoggedInSubject = new BehaviorSubject<boolean>(false);
   // isLoggedIn$ = this.isLoggedInSubject.asObservable();
@@ -121,7 +130,9 @@ export class SharedServices {
   }
 
   getAccessByJwt() {
-    const token = localStorage.getItem('jwtToken'); // or 'access_token' based on your storage key
+    const token = localStorage.getItem(this.jwtToken.jwtKey);// use of injected token
+    console.log("Using JWT Key: ", this.jwtToken.jwtKey);
+    // const token = localStorage.getItem('jwtToken'); // or 'access_token' based on your storage key
     const headers = {
       Authorization: `Bearer ${token}`,
     };

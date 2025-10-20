@@ -1,11 +1,20 @@
-import { Injectable } from '@angular/core';
+import { forwardRef, Inject, Injectable, Optional, Self } from '@angular/core';
 import { tap } from 'rxjs';
+import { LoaderService } from './loader.service';
+import { SharedServices } from './shared-services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RxJsOperators {
-  constructor(){}
+  constructor(
+
+    //@Optional() : to inject services that may or may not be provided
+    @Optional() private loaderService?: LoaderService ,  //Inject null if not present
+
+    //use of forwardRef() can also be done here to resolve circular dependencies
+    @Inject(forwardRef(() => SharedServices)) private sharedServices?: SharedServices //Inject from local injector only
+  ){}
 
   public dummyJson = [
     { id: 1, name: 'Alice', age: 30 },
