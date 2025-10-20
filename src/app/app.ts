@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LoaderComponent } from './Components/Loader/loader.component';
+import { LoaderComponent } from './Loader/loader.component';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from './Services/loader.service';
 import { SharedServices } from './Services/shared-services';
+import { Highlight } from './Custom_Directives/highlight';
+import { ExpandView } from './Custom_Directives/expand-view';
+import { RoleBaseView } from './Custom_Directives/role-base-view';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +18,9 @@ import { SharedServices } from './Services/shared-services';
     RouterLinkActive,
     LoaderComponent,
     CommonModule,
+    Highlight,
+    ExpandView,
+    RoleBaseView
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

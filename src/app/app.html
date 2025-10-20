@@ -1,22 +1,22 @@
 
 <nav class="navbar dark-navbar">
   <div class="navbar-container" *ngIf="sharedService.isLoggedInSignal()">
-    <button routerLink="/dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Home">
+    <button appHighlight  appExpandView routerLink="/dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Home">
       Home
     </button>
-    <button routerLink="/QuestionsDashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Questions">
+    <button appHighlight appExpandView routerLink="/QuestionsDashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Questions">
       Questions
     </button>
-    <button routerLink="/QuizDashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Quiz">
+    <button appHighlight appExpandView routerLink="/QuizDashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Quiz">
       Quiz
     </button>
-    <button routerLink="/admin-dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Admin">
+    <button appHighlight appExpandView *appRoleBaseView ="'ADMIN'" routerLink="/admin-dashboard" routerLinkActive="active" class="nav-btn nav-text-btn" title="Admin">
       Admin
     </button>
-    <button routerLink="/feedback" routerLinkActive="active" class="nav-btn nav-text-btn" title="Feedback">
+    <button appHighlight appExpandView routerLink="/feedback" routerLinkActive="active" class="nav-btn nav-text-btn" title="Feedback">
       Feedback
     </button>
-    <button (click)="logout()" class="nav-btn nav-text-btn" title="Logout">
+    <button appHighlight appExpandView (click)="logout()" class="nav-btn nav-text-btn" title="Logout">
       Logout
     </button>
   </div>

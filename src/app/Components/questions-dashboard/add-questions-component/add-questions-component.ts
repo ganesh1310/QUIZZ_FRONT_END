@@ -2,12 +2,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SharedServices } from '../../../Services/shared-services';
-import { HttpClientModule } from '@angular/common/http';
+import { Highlight } from '../../../Custom_Directives/highlight';
 
 @Component({
   selector: 'app-add-questions-component',
   standalone: true,
-  imports: [ReactiveFormsModule , HttpClientModule],
+  imports: [ReactiveFormsModule , Highlight],
   templateUrl: './add-questions-component.html',
   styleUrl: './add-questions-component.scss'
 })
@@ -16,9 +16,7 @@ export class AddQuestionsComponent {
   constructor(
     private fb: FormBuilder,
     private sharedService: SharedServices
-  ) 
-
-  {
+  ) {
     this.questionForm = this.fb.group({
       questionTitle: ['', Validators.required],
       option1: ['', Validators.required],

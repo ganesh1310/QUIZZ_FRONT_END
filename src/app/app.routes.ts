@@ -12,12 +12,12 @@ import { ViewAllQuizzesComponent } from './Components/quiz-dashboard-component/v
 import { SingupComponent } from './Components/singup-component/singup-component';
 import { LoginComponent } from './Components/login-component/login-component';
 import { AdminDashboard } from './Components/Admin-Dashboard/admin-dashboard/admin-dashboard';
-import { authGuard } from './Components/Guards/auth-guard';
-import { roleGuard } from './Components/Guards/role-guard';
+import { authGuard } from './Guards/auth-guard';
+import { roleGuard } from './Guards/role-guard';
 import { UnauthorizedUser } from './Components/unauthorized-user/unauthorized-user';
 import { FeedbackComponent } from './Components/Feedback-Component/feedback-component/feedback-component';
-import { canDeactivateGuard } from './Components/Guards/can-deactivate-guard';
-import { adminAccessGuard } from './Components/Guards/admin-access-guard';
+import { canDeactivateGuard } from './Guards/can-deactivate-guard';
+import { adminAccessGuard } from './Guards/admin-access-guard';
 import { AdminPannel } from './Components/dashboard-component/admin-pannel/admin-pannel';
 
 export const routes: Routes = [

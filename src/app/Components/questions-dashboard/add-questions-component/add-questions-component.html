@@ -1,7 +1,7 @@
 
 <div class="add-question-container">
 	<form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="question-form">
-		<h2>Add New Question</h2>
+		<h2 appHighlight>Add New Question</h2>
 		<div class="form-group">
 			<label for="questionTitle">Question</label>
 			<textarea id="questionTitle" formControlName="questionTitle" rows="2" placeholder="Enter question..." required></textarea>
