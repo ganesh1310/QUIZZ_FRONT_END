@@ -3,10 +3,12 @@ import { RxJsOperators } from '../../Services/rx-js-operators';
 import { LoaderService } from '../../Services/loader.service';
 import { SharedServices } from '../../Services/shared-services';
 import { DEFAULT_QUIZ_CONFIG, QuizConfig } from '../../Components/Quiz_Custom_Token/quiz-config';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { noSpecialCharsValidator } from '../../Custom_Validators/no-special-chars';
 import { isEmailRegistered } from '../../Custom_Validators/isEmailRegsitered';
+import { NoSpecialCharacterDirective } from '../../Custom_Validators/no-special-character-directive';
+import { IsEmailTakenDirective } from '../../Custom_Validators/is-email-taken-directive';
 
 const quizSettings: QuizConfig = {
   timeLimit: 30,
@@ -17,14 +19,19 @@ const quizSettings: QuizConfig = {
 
 @Component({
   selector: 'app-owner-information',
-  imports: [FormsModule , ReactiveFormsModule , CommonModule],
+  imports: [FormsModule , ReactiveFormsModule , CommonModule , NoSpecialCharacterDirective , IsEmailTakenDirective],
   templateUrl: './owner-information.html',
   styleUrl: './owner-information.scss',
   providers: [LoaderService, {provide : DEFAULT_QUIZ_CONFIG , useValue : quizSettings}], //local injector for Self() 
   standalone: true
 })
 export class OwnerInformation {
+
+  viewFormByType:String = '';
   ownerDataForm : FormGroup;
+
+  //Template Driven Form Variables
+  user = { username: '', email: '' };
   constructor(
     @Self() private LoaderService: LoaderService, //checks dependency only in local injector
 
@@ -62,6 +69,16 @@ export class OwnerInformation {
   onSubmit(){
     if(this.ownerDataForm.valid){
       console.log(this.ownerDataForm.value);
+    }
+  }
+
+  switchForms(type: String){
+    this.viewFormByType = type;
+  }
+
+  onSubmitTemplateForm(form: NgForm){
+    if(form.valid){
+      console.log(form.value);
     }
   }
 

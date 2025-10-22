@@ -19,9 +19,11 @@
     <button appHighlight appExpandView (click)="logout()" class="nav-btn nav-text-btn" title="Logout">
       Logout
     </button>
-    <button appHighlight routerLink="/owner" routerLinkActive="active" class="nav-btn nav-icon-btn" title="Owner Info">
-      Switch to Owner Info
-    </button>
+   <label class="toggle-switch" title="Switch To Owner Module">
+  <input type="checkbox" (change)="onToggle($event)" />
+  <span class="slider"></span>
+</label>
+
   </div>
   <div class="navbar-container" *ngIf="!(sharedService.isLoggedInSignal())">
     <span style="color: white; background: none;" class="welcome-message">Welcome to the Quiz App! Please log in or sign up.</span>

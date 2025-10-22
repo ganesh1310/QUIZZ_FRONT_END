@@ -1,9 +1,57 @@
+<div>
+  <button style="margin-left: 5px;" (click)="switchForms('TEMPLATE')">Template Driven Forms</button>
+  <button style="margin-left: 5px;" (click)="switchForms('REACTIVE')">Reactive Forms</button>
+</div>
 
+@if(viewFormByType === 'TEMPLATE'){
+<div class="Template">
+  <form #ownerDataTemplateForm="ngForm" (ngSubmit)="onSubmitTemplateForm(ownerDataTemplateForm)">
+    <label>Template Driven Forms</label>
+
+    <label>UserName</label>
+    <input name="username" [(ngModel)]="user.username" appNoSpecialCharacterDirective required #username="ngModel" />
+    <!-- <div
+      *ngIf="ownerDataTemplateForm.form.controls['username']?.invalid && ownerDataTemplateForm.form.controls['username']?.touched">
+      Username is required.
+    </div> -->
+    <div *ngIf="username.errors?.['required'] && username.touched">
+      <span style="color: red;">Username is required.</span> 
+    </div>
+
+    <div *ngIf="username.errors?.['specialCharacterNotAllowed'] && username.touched">
+      <span style="color: red;">Special characters are not allowed.</span>
+    </div>
+
+
+
+    <label>Email</label>
+    <input name="email" [(ngModel)]="user.email" type="email" required appIsEmailTakenDirective required #emailField="ngModel" />
+    <div *ngIf="emailField.errors?.['required'] && emailField.touched">
+        <span style="color: red;">Email is required.</span>
+      </div>
+
+      <div *ngIf="emailField.errors?.['email'] && emailField.touched">
+        <span style="color: red;">Invalid email format.</span>
+      </div>
+
+      <div *ngIf="emailField.pending">
+        <span style="color: orange;">Checking email availability...</span>
+      </div>
+
+      <div *ngIf="emailField.errors?.['emailTaken'] && emailField.touched">
+        <span style="color: red;">This email is already taken.</span>
+      </div>
+
+    <button type="submit" [disabled]="ownerDataTemplateForm.invalid">Submit</button>
+  </form>
+</div>
+} @else {
 <form [formGroup]="ownerDataForm" (ngSubmit)="onSubmit()">
+  <label>Reactive Forms</label>
   <div>
     <label for="ownerName">Owner Name:</label>
     <input id="ownerName" formControlName="ownerName" type="text" />
-     <div *ngIf="ownerDataForm.get('ownerName')?.hasError('noSpecialChars') && ownerDataForm.get('ownerName')?.touched">
+    <div *ngIf="ownerDataForm.get('ownerName')?.hasError('noSpecialChars') && ownerDataForm.get('ownerName')?.touched">
       <span style="color: red;">Special characters are not allowed.</span>
     </div>
   </div>
@@ -13,6 +61,7 @@
     <input id="ownerEmail" formControlName="ownerEmail" type="email" />
     <div *ngIf="ownerDataForm.get('ownerEmail')?.hasError('emailTaken') && ownerDataForm.get('ownerEmail')?.touched">
       <span style="color: red;">This email is already taken.</span>
+    </div>
   </div>
 
   <div>
@@ -20,7 +69,7 @@
     <input id="ownerAddress" formControlName="ownerAddress" type="text" />
   </div>
 
-   <div formArrayName="ownerContact">
+  <div formArrayName="ownerContact">
     <div *ngFor="let contact of ownerContactControls?.controls || []; let i = index">
       <input [formControlName]="i" placeholder="Option {{ i + 1 }}" />
       <button type="button" (click)="removeContact(i)">Remove</button>
@@ -28,5 +77,7 @@
     <button type="button" (click)="addContact()">Add Contact</button>
   </div>
 
-  <button type="submit" [disabled]="ownerDataForm.invalid">Submit</button>  
- 
+  <button type="submit" [disabled]="ownerDataForm.invalid">Submit</button>
+
+</form>
+}

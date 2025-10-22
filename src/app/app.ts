@@ -60,4 +60,11 @@ export class App implements OnInit {
     this.router.navigate(['/login']);
   }
   currentYear = new Date().getFullYear();
+
+  onToggle(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    if (isChecked) {
+      this.router.navigate(['/owner']);
+    }
+  }
 }
