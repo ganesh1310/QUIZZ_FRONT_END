@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 import { LoaderService } from '../../../Services/loader.service';
 import { CanDeactivate } from '@angular/router';
 import { HighlightSearchPipePipe } from '../../../CustomPipes/highlight-search-pipe-pipe';
+import { FilterFeedbakcByWordsPipe } from '../../../CustomPipes/filter-feedbakc-by-words-pipe';
 
 @Component({
   selector: 'app-feedback-component',
   templateUrl: './feedback-component.html',
   styleUrls: ['./feedback-component.scss'],
-  imports: [CommonModule, FormsModule , HighlightSearchPipePipe],
+  imports: [CommonModule, FormsModule , HighlightSearchPipePipe ,FilterFeedbakcByWordsPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })

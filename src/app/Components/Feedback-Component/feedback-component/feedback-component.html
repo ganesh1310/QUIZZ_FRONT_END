@@ -19,7 +19,7 @@
   </header>
   <div *ngIf="feedbackList && feedbackList.length > 0; else noFeedback">
     <ul class="feedback-list">
-      <li *ngFor="let fb of feedbackList" class="feedback-list-item">
+      <li *ngFor="let fb of feedbackList | filterFeedbakcByWords : 'Ganesh Gavhane'" class="feedback-list-item">
         <div class="feedback-user"><strong>{{ fb.userName }}</strong></div>
         <!-- <div class="feedback-desc">{{ fb.description }}</div> -->
         <div class="feedback-desc" [innerHTML]="fb.description | highlightSearchPipe:searchTerm"></div>
