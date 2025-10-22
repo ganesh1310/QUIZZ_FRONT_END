@@ -5,12 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from '../../../Services/loader.service';
 import { CanDeactivate } from '@angular/router';
+import { HighlightSearchPipePipe } from '../../../CustomPipes/highlight-search-pipe-pipe';
 
 @Component({
   selector: 'app-feedback-component',
   templateUrl: './feedback-component.html',
   styleUrls: ['./feedback-component.scss'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule , HighlightSearchPipePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
@@ -20,6 +21,7 @@ export class FeedbackComponent{
   hasChanges = false; // true when user types but hasn't submitted
   feedbackList: any[] = [];
   userRole: string = '';
+  searchTerm = '';
 
   constructor(
     private sharedService: SharedServices , 

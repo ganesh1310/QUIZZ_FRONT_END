@@ -1,6 +1,7 @@
 <div>
   <button style="margin-left: 5px;" (click)="switchForms('TEMPLATE')">Template Driven Forms</button>
   <button style="margin-left: 5px;" (click)="switchForms('REACTIVE')">Reactive Forms</button>
+  <button style="margin-left: 5px;" (click)="switchForms('DYNAMIC')">Dynamic Forms</button>
 </div>
 
 @if(viewFormByType === 'TEMPLATE'){
@@ -45,6 +46,23 @@
     <button type="submit" [disabled]="ownerDataTemplateForm.invalid">Submit</button>
   </form>
 </div>
+} @else if (viewFormByType === 'DYNAMIC') {
+  <form [formGroup]="dynamicOwnerForms" (ngSubmit)="submitDynamicForm()">
+      <div *ngFor="let field of formFields">
+        <label>{{ field.label | capitalizeFirst}}</label>
+        <input
+          [type]="field.type"
+          [formControlName]="field.name"
+          [placeholder]="field.placeholder"
+        />
+        <div *ngIf="dynamicOwnerForms.get(field.name)?.invalid && dynamicOwnerForms.get(field.name)?.touched">
+          <small style="color: red;" *ngIf="dynamicOwnerForms.get(field.name)?.errors?.['required']">This field is required.</small>
+          <small style="color: red;" *ngIf="dynamicOwnerForms.get(field.name)?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="dynamicOwnerForms.invalid">Submit</button>
+    </form>
 } @else {
 <form [formGroup]="ownerDataForm" (ngSubmit)="onSubmit()">
   <label>Reactive Forms</label>

@@ -1,4 +1,4 @@
-import { Component, Inject, Self, SkipSelf } from '@angular/core';
+import { Component, Inject, OnInit, Self, SkipSelf } from '@angular/core';
 import { RxJsOperators } from '../../Services/rx-js-operators';
 import { LoaderService } from '../../Services/loader.service';
 import { SharedServices } from '../../Services/shared-services';
@@ -9,6 +9,8 @@ import { noSpecialCharsValidator } from '../../Custom_Validators/no-special-char
 import { isEmailRegistered } from '../../Custom_Validators/isEmailRegsitered';
 import { NoSpecialCharacterDirective } from '../../Custom_Validators/no-special-character-directive';
 import { IsEmailTakenDirective } from '../../Custom_Validators/is-email-taken-directive';
+import { FormInputsConfig } from '../../DynamicFormConfig/form-inputs-config';
+import { CapitalizeFirstPipe } from '../../CustomPipes/capitalize-first-pipe';
 
 const quizSettings: QuizConfig = {
   timeLimit: 30,
@@ -19,13 +21,20 @@ const quizSettings: QuizConfig = {
 
 @Component({
   selector: 'app-owner-information',
-  imports: [FormsModule , ReactiveFormsModule , CommonModule , NoSpecialCharacterDirective , IsEmailTakenDirective],
+  imports: [
+    FormsModule , 
+    ReactiveFormsModule , 
+    CommonModule , 
+    NoSpecialCharacterDirective , 
+    IsEmailTakenDirective,
+    CapitalizeFirstPipe
+  ],
   templateUrl: './owner-information.html',
   styleUrl: './owner-information.scss',
   providers: [LoaderService, {provide : DEFAULT_QUIZ_CONFIG , useValue : quizSettings}], //local injector for Self() 
   standalone: true
 })
-export class OwnerInformation {
+export class OwnerInformation implements OnInit {
 
   viewFormByType:String = '';
   ownerDataForm : FormGroup;
@@ -54,6 +63,46 @@ export class OwnerInformation {
     });
   }
 
+  //custom pipe
+  searchTerm = '';
+  text = 'Ganesh Gavhane is a skilled Angular developer focused on signals and reactive forms.';
+
+  //dynamic form generation
+
+  dynamicOwnerForms !: FormGroup;
+
+  formFields : FormInputsConfig[] = [
+    {
+      label: 'full Name',
+      name: 'fullName',
+      type: 'text',
+      placeholder: 'Enter your name',
+      validators: [Validators.required]
+    },
+    {
+      label: 'Email',
+      name: 'email',
+      type: 'email',
+      placeholder: 'Enter your email',
+      validators: [Validators.required, Validators.email]
+    },
+    {
+      label: 'Age',
+      name: 'age',
+      type: 'number',
+      placeholder: 'Enter your age'
+    }
+  ];
+
+  ngOnInit(): void {
+    const group : any = {};
+    this.formFields.forEach(field =>{
+      group[field.name] = ['', field.validators ? field.validators : []];
+    });
+    this.dynamicOwnerForms = this.fb.group(group);
+
+  }
+
   get ownerContactControls() : FormArray {
     return this.ownerDataForm.get('ownerContact') as FormArray;
   }
@@ -79,6 +128,12 @@ export class OwnerInformation {
   onSubmitTemplateForm(form: NgForm){
     if(form.valid){
       console.log(form.value);
+    }
+  }
+
+  submitDynamicForm(){
+    if(this.dynamicOwnerForms.valid){
+      console.log(this.dynamicOwnerForms.value);
     }
   }
 
