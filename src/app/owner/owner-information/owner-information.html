@@ -1,1 +1,32 @@
-<p>owner-information works!</p>
+
+<form [formGroup]="ownerDataForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="ownerName">Owner Name:</label>
+    <input id="ownerName" formControlName="ownerName" type="text" />
+     <div *ngIf="ownerDataForm.get('ownerName')?.hasError('noSpecialChars') && ownerDataForm.get('ownerName')?.touched">
+      <span style="color: red;">Special characters are not allowed.</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="ownerEmail">Owner Email:</label>
+    <input id="ownerEmail" formControlName="ownerEmail" type="email" />
+    <div *ngIf="ownerDataForm.get('ownerEmail')?.hasError('emailTaken') && ownerDataForm.get('ownerEmail')?.touched">
+      <span style="color: red;">This email is already taken.</span>
+  </div>
+
+  <div>
+    <label for="ownerAddress">Owner Address:</label>
+    <input id="ownerAddress" formControlName="ownerAddress" type="text" />
+  </div>
+
+   <div formArrayName="ownerContact">
+    <div *ngFor="let contact of ownerContactControls?.controls || []; let i = index">
+      <input [formControlName]="i" placeholder="Option {{ i + 1 }}" />
+      <button type="button" (click)="removeContact(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addContact()">Add Contact</button>
+  </div>
+
+  <button type="submit" [disabled]="ownerDataForm.invalid">Submit</button>  
+ 

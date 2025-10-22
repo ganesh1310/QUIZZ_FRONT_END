@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { SharedServices } from '../../../Services/shared-services';
 import { Highlight } from '../../../Custom_Directives/highlight';
 
@@ -26,6 +26,7 @@ export class AddQuestionsComponent {
       rightAnswer: ['', Validators.required],
       difficultylevel: ['', Validators.required],
       category: ['', Validators.required]
+      // category : new FormControl('', Validators.required)
     });
   }
 

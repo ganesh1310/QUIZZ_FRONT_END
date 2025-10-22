@@ -1,0 +1,71 @@
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+form div {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #0078d4;
+  outline: none;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+button[type="button"] {
+  background-color: #e0e0e0;
+  color: #333;
+  margin-left: 0.5rem;
+}
+
+button[type="button"]:hover {
+  background-color: #d0d0d0;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+div[formArrayName="ownerContact"] {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #eef6ff;
+  border-radius: 6px;
+}
